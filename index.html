@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0a0f">
+<title>FallStudio · sovereign creative suite</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27><rect width=%2764%27 height=%2764%27 fill=%27%230b0a0f%27 rx=%2710%27/><text x=%2732%27 y=%2744%27 font-family=%27Georgia, serif%27 font-size=%2740%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23ff8c00%27>◊</text></svg>">
+<link rel="manifest" href='data:application/manifest+json,{"name":"FallStudio","short_name":"FallStudio","start_url":"./","display":"standalone","background_color":"%230b0a0f","theme_color":"%23ff8c00","icons":[{"src":"data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 192 192%27><rect width=%27192%27 height=%27192%27 fill=%27%230b0a0f%27 rx=%2728%27/><text x=%2796%27 y=%27130%27 font-family=%27Georgia, serif%27 font-size=%27108%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23ff8c00%27>◊</text></svg>","sizes":"192x192","type":"image/svg+xml"}]}'>
+<style>
+:root{
+  --void:#0b0a0f; --void-2:#13121a; --ink:#1a1922; --ink-2:#22212c;
+  --line:#2a2934; --line-soft:#1f1e28;
+  --cream:#e6e1d6; --cream-dim:#a8a395; --cream-muted:#6e6a5e;
+  --brass:#b8974a; --amber:#ff8c00; --ox:#8b1a1a;
+  --green:#4ade80; --red:#ef4444; --blue:#60a5fa; --yellow:#fbbf24;
+  --serif:Georgia,'Libre Baskerville',ui-serif,serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--void);color:var(--cream);font-family:var(--sans);font-size:15px;line-height:1.55;min-height:100vh}
+body{
+  background:
+    radial-gradient(ellipse at top left, rgba(184,151,74,0.05), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(255,140,0,0.04), transparent 60%),
+    var(--void);
+  background-attachment:fixed;
+}
+a{color:var(--brass);text-decoration:none}
+a:hover{color:var(--amber)}
+button{font-family:inherit;cursor:pointer}
+
+/* ----- header ----- */
+header{
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,var(--void-2),var(--void));
+  padding:18px 24px;
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(8px);
+}
+.hd-row{display:flex;align-items:center;gap:20px;max-width:1200px;margin:0 auto}
+.mark{display:flex;align-items:center;gap:14px}
+.mark-glyph{
+  font-family:var(--serif);font-size:36px;font-weight:700;
+  background:linear-gradient(135deg,var(--brass),var(--amber));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1;
+}
+.mark-text{display:flex;flex-direction:column;line-height:1.1}
+.mark-name{font-family:var(--serif);font-size:22px;letter-spacing:0.5px}
+.mark-sub{font-family:var(--mono);font-size:10px;color:var(--cream-muted);text-transform:uppercase;letter-spacing:1.5px}
+.hd-spacer{flex:1}
+.hd-pill{
+  font-family:var(--mono);font-size:11px;color:var(--cream-dim);
+  border:1px solid var(--line);padding:5px 10px;border-radius:999px;
+  background:var(--ink);
+}
+.hd-pill.t3{color:var(--amber);border-color:var(--amber)}
+.omega-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--brass),var(--amber));
+  color:var(--void);font-weight:600;font-size:13px;
+  border:none;padding:9px 16px;border-radius:8px;
+  box-shadow:0 0 18px rgba(255,140,0,0.25);
+}
+.omega-btn:hover{filter:brightness(1.1)}
+.omega-btn kbd{
+  font-family:var(--mono);font-size:10px;background:rgba(0,0,0,0.25);
+  padding:2px 6px;border-radius:4px;color:var(--void);
+}
+
+/* ----- hero ----- */
+.hero{
+  max-width:1200px;margin:0 auto;padding:56px 24px 32px;
+}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:11px;color:var(--brass);
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:700;font-size:clamp(28px,4.5vw,46px);
+  line-height:1.12;margin:0 0 18px;color:var(--cream);
+  letter-spacing:-0.5px;
+}
+.hero h1 .accent{
+  background:linear-gradient(135deg,var(--brass),var(--amber));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{font-size:17px;color:var(--cream-dim);max-width:720px;margin:0}
+
+/* ----- section ----- */
+section{max-width:1200px;margin:0 auto;padding:32px 24px}
+.sec-hd{
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-bottom:1px solid var(--line-soft);padding-bottom:12px;margin-bottom:24px;
+  gap:12px;flex-wrap:wrap;
+}
+.sec-hd h2{
+  font-family:var(--serif);font-size:22px;font-weight:600;margin:0;color:var(--cream);
+}
+.sec-hd .sec-meta{font-family:var(--mono);font-size:11px;color:var(--cream-muted);text-transform:uppercase;letter-spacing:1.2px}
+
+/* ----- suite grid ----- */
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;
+}
+.card{
+  background:linear-gradient(180deg,var(--ink),var(--void-2));
+  border:1px solid var(--line);border-radius:12px;padding:22px;
+  position:relative;overflow:hidden;
+  transition:border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  display:flex;flex-direction:column;gap:12px;min-height:240px;
+}
+.card:hover{
+  border-color:var(--brass);
+  transform:translateY(-2px);
+  box-shadow:0 0 0 1px rgba(184,151,74,0.2), 0 8px 32px rgba(255,140,0,0.12);
+}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card-glyph{
+  font-family:var(--serif);font-size:42px;line-height:1;
+  background:linear-gradient(135deg,var(--brass),var(--amber));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.card-status{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:10px;color:var(--cream-muted);
+  text-transform:uppercase;letter-spacing:1px;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--cream-muted)}
+.dot.up{background:var(--green);box-shadow:0 0 6px var(--green)}
+.dot.down{background:var(--red);box-shadow:0 0 6px var(--red)}
+.dot.checking{background:var(--yellow);animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+
+.card-name{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--cream);margin:0}
+.card-replaces{font-family:var(--mono);font-size:10.5px;color:var(--brass);text-transform:uppercase;letter-spacing:1.2px;margin-top:-4px}
+.card-purpose{color:var(--cream-dim);font-size:14px;line-height:1.5;flex:1}
+
+.card-detail{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.3s ease;
+  opacity:0;
+}
+.card:hover .card-detail, .card.touched .card-detail{
+  max-height:200px;opacity:1;
+}
+.card-features{
+  list-style:none;padding:0;margin:8px 0 0;
+  font-size:12.5px;color:var(--cream-dim);
+}
+.card-features li{
+  padding:2px 0 2px 14px;position:relative;
+}
+.card-features li::before{
+  content:"·";color:var(--brass);position:absolute;left:4px;font-weight:700;
+}
+.card-meta{
+  display:flex;gap:12px;font-family:var(--mono);font-size:10px;
+  color:var(--cream-muted);text-transform:uppercase;letter-spacing:1px;
+  border-top:1px solid var(--line-soft);padding-top:10px;margin-top:6px;
+}
+.card-meta span{display:inline-flex;align-items:center;gap:4px}
+.card-meta b{color:var(--brass);font-weight:600}
+
+.card-actions{display:flex;gap:8px;margin-top:auto}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  background:var(--ink-2);border:1px solid var(--line);
+  color:var(--cream);font-size:13px;font-weight:500;
+  padding:8px 14px;border-radius:8px;text-decoration:none;
+  transition:all 0.2s;flex:1;
+}
+.btn:hover{background:var(--brass);color:var(--void);border-color:var(--brass)}
+.btn.primary{
+  background:linear-gradient(135deg,var(--brass),var(--amber));
+  border-color:transparent;color:var(--void);font-weight:600;
+}
+.btn.primary:hover{filter:brightness(1.1)}
+
+/* ----- estate links ----- */
+.estate-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;
+}
+.estate-card{
+  background:var(--void-2);border:1px solid var(--line-soft);border-radius:10px;
+  padding:16px;display:block;
+  transition:border-color 0.2s, background 0.2s;
+}
+.estate-card:hover{border-color:var(--brass);background:var(--ink)}
+.estate-card h3{
+  font-family:var(--serif);font-size:15px;margin:0 0 4px;color:var(--cream);
+}
+.estate-card p{margin:0;font-size:12px;color:var(--cream-muted);font-family:var(--mono)}
+
+/* ----- footer ----- */
+footer{
+  max-width:1200px;margin:0 auto;padding:32px 24px 60px;
+  border-top:1px solid var(--line-soft);margin-top:40px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;color:var(--cream-muted);
+  text-transform:uppercase;letter-spacing:1.3px;
+}
+.footer-mark{font-family:var(--serif);font-size:24px;color:var(--brass);text-transform:none;letter-spacing:0}
+.footer-meta a{color:var(--cream-dim)}
+.footer-meta{display:flex;gap:18px;flex-wrap:wrap}
+
+/* ----- Ω palette ----- */
+.palette-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);
+  z-index:100;display:none;align-items:flex-start;justify-content:center;
+  padding-top:12vh;
+}
+.palette-bg.open{display:flex}
+.palette{
+  width:min(640px,92vw);
+  background:var(--ink);border:1px solid var(--brass);border-radius:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(255,140,0,0.15);
+  overflow:hidden;
+}
+.palette-hd{
+  display:flex;align-items:center;gap:12px;padding:14px 18px;
+  border-bottom:1px solid var(--line);background:var(--void-2);
+}
+.palette-hd .glyph{
+  font-family:var(--serif);font-size:24px;color:var(--amber);line-height:1;
+}
+.palette-hd input{
+  flex:1;background:transparent;border:0;outline:0;
+  color:var(--cream);font-size:16px;font-family:var(--sans);
+}
+.palette-hd input::placeholder{color:var(--cream-muted)}
+.badge{
+  font-family:var(--mono);font-size:10px;color:var(--cream-dim);
+  border:1px solid var(--line);padding:3px 8px;border-radius:999px;
+  text-transform:uppercase;letter-spacing:1px;
+}
+.badge.t3{color:var(--amber);border-color:var(--amber)}
+.palette-bd{max-height:50vh;overflow-y:auto;padding:6px}
+.p-row{
+  display:flex;align-items:center;gap:14px;padding:11px 14px;
+  border-radius:8px;cursor:pointer;
+  border:1px solid transparent;
+}
+.p-row:hover, .p-row.sel{background:var(--ink-2);border-color:var(--line)}
+.p-row .pg{
+  font-family:var(--serif);font-size:22px;line-height:1;
+  background:linear-gradient(135deg,var(--brass),var(--amber));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  min-width:32px;text-align:center;
+}
+.p-row .pn{font-family:var(--serif);font-size:15px;color:var(--cream);font-weight:600}
+.p-row .pd{font-size:12px;color:var(--cream-muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.8px}
+.p-row .pi{flex:1;display:flex;flex-direction:column;gap:2px}
+.p-row .pk{
+  font-family:var(--mono);font-size:10px;color:var(--cream-muted);
+  border:1px solid var(--line);padding:3px 8px;border-radius:5px;
+}
+.p-empty{
+  padding:24px;text-align:center;color:var(--cream-muted);font-family:var(--mono);font-size:12px;
+}
+
+/* ----- settings modal ----- */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);
+  z-index:90;display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-bg.open{display:flex}
+.modal{
+  width:min(520px,100%);max-height:85vh;overflow-y:auto;
+  background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:24px;
+}
+.modal h3{font-family:var(--serif);margin:0 0 4px;color:var(--cream);font-size:20px}
+.modal p.sub{color:var(--cream-muted);font-size:13px;margin:0 0 18px}
+.modal label{
+  display:block;font-family:var(--mono);font-size:10.5px;color:var(--cream-dim);
+  text-transform:uppercase;letter-spacing:1.2px;margin:14px 0 6px;
+}
+.modal input[type=password], .modal input[type=text]{
+  width:100%;background:var(--void);border:1px solid var(--line);border-radius:6px;
+  color:var(--cream);padding:9px 12px;font-family:var(--mono);font-size:13px;
+}
+.modal input:focus{outline:none;border-color:var(--brass)}
+.modal-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+
+/* ----- toast ----- */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);border:1px solid var(--brass);border-radius:8px;
+  color:var(--cream);padding:11px 18px;font-size:13px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  opacity:0;transition:all 0.25s;z-index:200;pointer-events:none;
+  font-family:var(--mono);text-transform:uppercase;letter-spacing:1px;font-size:11px;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ----- mobile ----- */
+@media (max-width:760px){
+  header{padding:12px 16px}
+  .hd-row{gap:10px}
+  .mark-name{font-size:18px}
+  .mark-glyph{font-size:30px}
+  .omega-btn{padding:7px 12px;font-size:12px}
+  .omega-btn kbd{display:none}
+  .hero{padding:32px 16px 24px}
+  section{padding:24px 16px}
+  .grid{grid-template-columns:1fr;gap:12px}
+  .card{min-height:auto}
+  .card-detail{max-height:200px;opacity:1}
+  .estate-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;align-items:flex-start;gap:14px}
+  .palette-bg{padding-top:5vh}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd-row">
+    <div class="mark">
+      <span class="mark-glyph">◊</span>
+      <div class="mark-text">
+        <span class="mark-name">FallStudio</span>
+        <span class="mark-sub">prime 491 · v1.0.0</span>
+      </div>
+    </div>
+    <div class="hd-spacer"></div>
+    <span class="hd-pill" id="tierBadge" title="cascade tier">offline</span>
+    <button class="hd-pill" onclick="openSettings()" title="settings">settings</button>
+    <button class="omega-btn" onclick="openPalette()">Ω autopilot <kbd>Ctrl K</kbd></button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">◊ the sovereign creative suite</div>
+  <h1>FallStudio <span class="accent">·</span> Adobe Creative Cloud, <span class="accent">replaced</span> one HTML file at a time.</h1>
+  <p>Eight sovereign tools. One menu. Each tool is a single HTML file that runs offline, owns no data, sends nothing home. Press <kbd style="font-family:var(--mono);background:var(--ink);padding:2px 7px;border-radius:4px;border:1px solid var(--line);font-size:12px">Ctrl K</kbd> and tell it what you want to make.</p>
+</div>
+
+<section>
+  <div class="sec-hd">
+    <h2>the suite</h2>
+    <span class="sec-meta">8 tools · <span id="liveCount">checking</span> live</span>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section>
+  <div class="sec-hd">
+    <h2>the wider estate</h2>
+    <span class="sec-meta">fall* · sovereign tools</span>
+  </div>
+  <div class="estate-grid">
+    <a class="estate-card" href="https://sjgant80-hub.github.io/fall-registry/" target="_blank" rel="noopener">
+      <h3>fall-registry</h3>
+      <p>source-of-truth manifest · all primes</p>
+    </a>
+    <a class="estate-card" href="https://sjgant80-hub.github.io/fallfind/" target="_blank" rel="noopener">
+      <h3>fallfind</h3>
+      <p>estate search · find any tool</p>
+    </a>
+    <a class="estate-card" href="https://ai-nativesolutions.com" target="_blank" rel="noopener">
+      <h3>ai-nativesolutions.com</h3>
+      <p>the workshop · the doctrine</p>
+    </a>
+    <a class="estate-card" href="https://sjgant80-hub.github.io/" target="_blank" rel="noopener">
+      <h3>AI Craftspeople Guild</h3>
+      <p>sjgant80-hub · the index</p>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-mark">◊</div>
+    <div style="margin-top:6px">FallStudio · prime 491 · v1.0.0 · MIT · ◊·κ=1</div>
+  </div>
+  <div class="footer-meta">
+    <a href="#" onclick="exportManifest();return false">manifest.json</a>
+    <a href="https://github.com/sjgant80-hub/fallstudio" target="_blank" rel="noopener">source</a>
+    <a href="#" onclick="openSettings();return false">settings</a>
+    <a href="#" onclick="openPalette();return false">Ω autopilot</a>
+  </div>
+</footer>
+
+<!-- Ω palette -->
+<div class="palette-bg" id="palette" onclick="if(event.target===this)closePalette()">
+  <div class="palette">
+    <div class="palette-hd">
+      <span class="glyph">Ω</span>
+      <input id="pInput" placeholder="what do you want to make? (e.g. edit a photo · brochure · 3d render · logo)" autocomplete="off">
+      <span class="badge" id="pTier">T0</span>
+    </div>
+    <div class="palette-bd" id="pBody"></div>
+  </div>
+</div>
+
+<!-- settings modal -->
+<div class="modal-bg" id="settings" onclick="if(event.target===this)closeSettings()">
+  <div class="modal">
+    <h3>settings</h3>
+    <p class="sub">BYOK · keys are stored locally · never sent anywhere except the provider you supply them to.</p>
+    <label>Anthropic API key (Claude · T3)</label>
+    <input id="sAnthropic" type="password" placeholder="sk-ant-...">
+    <label>OpenAI API key (GPT · T3)</label>
+    <input id="sOpenai" type="password" placeholder="sk-...">
+    <label>Gemini API key (T3)</label>
+    <input id="sGemini" type="password" placeholder="AIza...">
+    <label>OpenRouter API key (T3)</label>
+    <input id="sOpenrouter" type="password" placeholder="sk-or-...">
+    <div class="modal-actions">
+      <button class="btn" onclick="closeSettings()">cancel</button>
+      <button class="btn primary" onclick="saveSettings()">save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+const PRIME = 491;
+const VERSION = '1.0.0';
+
+const state = {
+  settings: {},
+  pSel: 0,
+  pResults: [],
+  liveCount: 0,
+};
+
+/* ---------- suite registry ---------- */
+const SUITE = [
+  {
+    id:'fallmage', icon:'◧', name:'FallMage', replaces:'Photoshop',
+    url:'https://sjgant80-hub.github.io/fallmage/',
+    purpose:'Raster image editor · crop, filter, paint, retouch · runs entirely in your browser.',
+    size:'~210KB', prime:269,
+    features:['Layers · blend modes · masks','Brushes · filters · adjustments','PNG / JPG / WebP export','Drag-drop or paste any image'],
+  },
+  {
+    id:'fallpdf', icon:'▦', name:'FallPDF', replaces:'Acrobat (writer)',
+    url:'https://sjgant80-hub.github.io/fallpdf/',
+    purpose:'Author PDFs from text, images and templates · letters, memos, invoices, briefs.',
+    size:'~180KB', prime:311,
+    features:['Template-driven authoring','Headers, footers, page numbers','Inline images and tables','One-click export · self-contained PDF'],
+  },
+  {
+    id:'fallvector', icon:'◊', name:'FallVector', replaces:'Illustrator',
+    url:'https://sjgant80-hub.github.io/fallvector/',
+    purpose:'Vector illustration · logos, icons, SVG · pen tool, paths, boolean ops.',
+    size:'~240KB', prime:347,
+    features:['Pen · pencil · shape tools','Boolean path operations','SVG export · pixel-perfect','Layers · groups · alignment'],
+  },
+  {
+    id:'fallpage', icon:'▤', name:'FallPage', replaces:'InDesign',
+    url:'https://sjgant80-hub.github.io/fallpage/',
+    purpose:'Page layout · brochures, magazines, booklets, spreads · grids and columns.',
+    size:'~200KB', prime:373,
+    features:['Multi-page documents','Grids · guides · columns','Text frames with linking','PDF / print-ready export'],
+  },
+  {
+    id:'fallaudio', icon:'♪', name:'FallAudio', replaces:'Audition',
+    url:'https://sjgant80-hub.github.io/fallaudio/',
+    purpose:'Audio capture and editing · voice memos, podcasts, soundbeds · WAV / MP3.',
+    size:'~190KB', prime:401,
+    features:['Browser mic capture · multi-track','Trim · fade · normalise · EQ','WAV / MP3 / OGG export','Waveform editing'],
+  },
+  {
+    id:'fallmotion', icon:'▶', name:'FallMotion', replaces:'After Effects',
+    url:'https://sjgant80-hub.github.io/fallmotion/',
+    purpose:'Motion graphics · logo animation, lower thirds, GIF / WebM loops · keyframe timeline.',
+    size:'~260KB', prime:431,
+    features:['Keyframe timeline · easing','SVG + raster animation','GIF / WebM / MP4 export','Presets · reveals · lower thirds'],
+  },
+  {
+    id:'fallasset', icon:'⊞', name:'FallAsset', replaces:'Bridge / Lightroom',
+    url:'https://sjgant80-hub.github.io/fallasset/',
+    purpose:'Asset library · catalogue, tag, rate, browse · photo and graphic collections.',
+    size:'~170KB', prime:457,
+    features:['IndexedDB-backed library','Tags · ratings · collections','EXIF · filter · search','Drag-drop import · batch ops'],
+  },
+  {
+    id:'fallscene', icon:'◉', name:'FallScene', replaces:'Dimension',
+    url:'https://sjgant80-hub.github.io/fallscene/',
+    purpose:'3D product staging · GLB import, materials, lighting, render to PNG.',
+    size:'~280KB', prime:479,
+    features:['GLB / GLTF import','PBR materials · HDRI lighting','Real-time WebGL preview','Snapshot · PNG render export'],
+  },
+];
+
+/* ---------- T0 router ---------- */
+const ROUTES = [
+  { tool:'fallmage',   verbs:/\b(image|photo|crop|filter|brush|paint|jpg|png|webp|edit picture|retouch|mask|layer)\b/i },
+  { tool:'fallpdf',    verbs:/\b(pdf|document|letter|memo|invoice|cv|resume|report|brief|contract)\b/i },
+  { tool:'fallvector', verbs:/\b(vector|svg|logo|illustration|icon|graphic)\b/i },
+  { tool:'fallpage',   verbs:/\b(brochure|layout|page|magazine|booklet|spread|columns|newsletter|zine)\b/i },
+  { tool:'fallaudio',  verbs:/\b(audio|sound|record|voice|wav|mp3|podcast|mic|jingle)\b/i },
+  { tool:'fallmotion', verbs:/\b(animat|motion|gif|video|webm|reveal|lower third|loop|kinetic)\b/i },
+  { tool:'fallasset',  verbs:/\b(organi[sz]e|browse|library|collection|tag|rate|catalog|catalogue|sort)\b/i },
+  { tool:'fallscene',  verbs:/\b(3d|render|scene|model|product render|glb|gltf|staging|three-?d)\b/i },
+];
+
+function routeT0(intent){
+  if(!intent || !intent.trim()) return [];
+  const hits = [];
+  for(const r of ROUTES){
+    const m = intent.match(r.verbs);
+    if(m){
+      const tool = SUITE.find(t => t.id === r.tool);
+      if(tool) hits.push({tool, match:m[0], hint:intent});
+    }
+  }
+  // dedupe by tool id
+  const seen = new Set();
+  return hits.filter(h => { if(seen.has(h.tool.id))return false; seen.add(h.tool.id); return true; });
+}
+
+/* ---------- Cascade (T0 / T2 / T3) ---------- */
+const Cascade={
+  async detectTier(){if(await this._probe())return'T2';const s=state.settings;if(s.anthropicKey||s.openaiKey||s.geminiKey||s.openrouterKey)return'T3';return'T0'},
+  async _probe(){if(this._p!==undefined)return this._p;try{this._p=await Promise.race([fetch('http://127.0.0.1:11434/api/tags').then(r=>r.ok),new Promise(r=>setTimeout(()=>r(false),350))])}catch(e){this._p=false}return this._p},
+  async generate(sys,user,maxTok){const s=state.settings,max=maxTok||1200;
+    if(s.anthropicKey)try{const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':s.anthropicKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5',max_tokens:max,system:sys,messages:[{role:'user',content:user}]})});const d=await r.json();return{tier:'T3·Claude',text:d?.content?.[0]?.text||''}}catch(e){}
+    if(s.geminiKey)try{const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${s.geminiKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({systemInstruction:{parts:[{text:sys}]},contents:[{parts:[{text:user}]}]})});const d=await r.json();return{tier:'T3·Gemini',text:d?.candidates?.[0]?.content?.parts?.[0]?.text||''}}catch(e){}
+    if(s.openaiKey)try{const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+s.openaiKey},body:JSON.stringify({model:'gpt-4o-mini',messages:[{role:'system',content:sys},{role:'user',content:user}]})});const d=await r.json();return{tier:'T3·GPT',text:d?.choices?.[0]?.message?.content||''}}catch(e){}
+    if(s.openrouterKey)try{const r=await fetch('https://openrouter.ai/api/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+s.openrouterKey,'HTTP-Referer':location.origin},body:JSON.stringify({model:'anthropic/claude-haiku-4-5',messages:[{role:'system',content:sys},{role:'user',content:user}]})});const d=await r.json();return{tier:'T3·OpenRouter',text:d?.choices?.[0]?.message?.content||''}}catch(e){}
+    return{tier:'T0',text:null}
+  }
+};
+async function updateTierBadge(){const t=await Cascade.detectTier();const el=document.getElementById('tierBadge');if(el){el.textContent=t==='T0'?'offline':t;el.classList.toggle('t3',t!=='T0')}
+  const pT=document.getElementById('pTier');if(pT){pT.textContent=t;pT.classList.toggle('t3',t!=='T0')}}
+
+/* ---------- T3 LLM router ---------- */
+async function routeT3(intent){
+  const sys = `You are the FallStudio router. The suite contains 8 tools:
+${SUITE.map(t => `- ${t.id} (replaces ${t.replaces}): ${t.purpose}`).join('\n')}
+Given a user intent, return a JSON object: {"tool":"<tool id>","hint":"<short pre-fill hint for the tool>","why":"<one-line reason>"}
+Return ONLY the JSON object, no prose, no markdown fences.`;
+  const out = await Cascade.generate(sys, intent, 240);
+  if(!out.text) return null;
+  try{
+    const m = out.text.match(/\{[\s\S]*\}/);
+    if(!m) return null;
+    const parsed = JSON.parse(m[0]);
+    const tool = SUITE.find(t => t.id === parsed.tool);
+    if(!tool) return null;
+    return {tool, hint:parsed.hint||intent, why:parsed.why||'', tier:out.tier};
+  }catch(e){ return null; }
+}
+
+/* ---------- render grid ---------- */
+function renderGrid(){
+  const g = document.getElementById('grid');
+  g.innerHTML = SUITE.map(t => `
+    <div class="card" data-id="${t.id}" onclick="this.classList.toggle('touched')">
+      <div class="card-top">
+        <span class="card-glyph">${t.icon}</span>
+        <span class="card-status"><span class="dot checking" id="dot-${t.id}"></span><span id="st-${t.id}">checking</span></span>
+      </div>
+      <div>
+        <div class="card-name">${t.name}</div>
+        <div class="card-replaces">replaces ${t.replaces}</div>
+      </div>
+      <div class="card-purpose">${t.purpose}</div>
+      <div class="card-detail">
+        <ul class="card-features">${t.features.map(f => `<li>${f}</li>`).join('')}</ul>
+        <div class="card-meta">
+          <span>prime <b>${t.prime}</b></span>
+          <span>size <b>${t.size}</b></span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="btn primary" href="${t.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">open ${t.name} ↗</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ---------- live status ping ---------- */
+async function checkLive(){
+  let live = 0;
+  await Promise.all(SUITE.map(async t => {
+    const dot = document.getElementById('dot-'+t.id);
+    const lbl = document.getElementById('st-'+t.id);
+    try{
+      const ctl = new AbortController();
+      const timer = setTimeout(()=>ctl.abort(), 5000);
+      // use no-cors so we at least get a response opaque to us; if it errors, it's down
+      const r = await fetch(t.url, {method:'GET', mode:'no-cors', signal:ctl.signal, cache:'no-store'});
+      clearTimeout(timer);
+      // opaque responses succeed silently — treat as live
+      dot.classList.remove('checking','down');
+      dot.classList.add('up');
+      lbl.textContent = 'live';
+      live++;
+    }catch(e){
+      dot.classList.remove('checking','up');
+      dot.classList.add('down');
+      lbl.textContent = 'deploying';
+    }
+  }));
+  state.liveCount = live;
+  document.getElementById('liveCount').textContent = live + '/' + SUITE.length;
+}
+
+/* ---------- Ω palette ---------- */
+function openPalette(){
+  document.getElementById('palette').classList.add('open');
+  const inp = document.getElementById('pInput');
+  inp.value = '';
+  setTimeout(()=>inp.focus(), 40);
+  renderPaletteSuggestions();
+}
+function closePalette(){
+  document.getElementById('palette').classList.remove('open');
+}
+
+function renderPaletteSuggestions(){
+  const body = document.getElementById('pBody');
+  state.pResults = SUITE.map(t => ({tool:t, hint:''}));
+  state.pSel = 0;
+  body.innerHTML = `<div style="padding:10px 16px 6px;font-family:var(--mono);font-size:10px;color:var(--cream-muted);text-transform:uppercase;letter-spacing:1.2px">all tools</div>` +
+    state.pResults.map((r,i) => paletteRow(r, i)).join('');
+  attachPaletteHandlers();
+}
+
+function paletteRow(r, i){
+  return `<div class="p-row ${i===state.pSel?'sel':''}" data-i="${i}">
+    <span class="pg">${r.tool.icon}</span>
+    <div class="pi">
+      <span class="pn">${r.tool.name}</span>
+      <span class="pd">${r.tool.replaces} · ${r.tool.purpose.split('·')[0].trim()}</span>
+    </div>
+    <span class="pk">↵</span>
+  </div>`;
+}
+
+function attachPaletteHandlers(){
+  document.querySelectorAll('.p-row').forEach(el => {
+    el.onclick = () => {
+      const i = +el.dataset.i;
+      const r = state.pResults[i];
+      if(r) launchTool(r.tool, r.hint || document.getElementById('pInput').value);
+    };
+  });
+}
+
+async function runPaletteQuery(q){
+  const body = document.getElementById('pBody');
+  if(!q.trim()){ renderPaletteSuggestions(); return; }
+
+  // T0 first
+  const t0 = routeT0(q);
+  if(t0.length){
+    state.pResults = t0.map(h => ({tool:h.tool, hint:q, match:h.match}));
+    state.pSel = 0;
+    body.innerHTML = `<div style="padding:10px 16px 6px;font-family:var(--mono);font-size:10px;color:var(--brass);text-transform:uppercase;letter-spacing:1.2px">T0 · keyword match</div>` +
+      state.pResults.map((r,i) => paletteRow(r, i)).join('');
+    attachPaletteHandlers();
+    return;
+  }
+
+  // try T3
+  const tier = await Cascade.detectTier();
+  if(tier === 'T3'){
+    body.innerHTML = `<div class="p-empty">routing via ${tier} · parsing intent…</div>`;
+    const t3 = await routeT3(q);
+    if(t3){
+      state.pResults = [{tool:t3.tool, hint:t3.hint}];
+      state.pSel = 0;
+      body.innerHTML = `<div style="padding:10px 16px 6px;font-family:var(--mono);font-size:10px;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px">${t3.tier} · ${t3.why||'parsed intent'}</div>` +
+        paletteRow(state.pResults[0], 0);
+      attachPaletteHandlers();
+      return;
+    }
+  }
+
+  // fallback: fuzzy name match
+  const ql = q.toLowerCase();
+  const fuzzy = SUITE.filter(t =>
+    t.name.toLowerCase().includes(ql) ||
+    t.replaces.toLowerCase().includes(ql) ||
+    t.purpose.toLowerCase().includes(ql)
+  );
+  if(fuzzy.length){
+    state.pResults = fuzzy.map(t => ({tool:t, hint:q}));
+    state.pSel = 0;
+    body.innerHTML = `<div style="padding:10px 16px 6px;font-family:var(--mono);font-size:10px;color:var(--cream-muted);text-transform:uppercase;letter-spacing:1.2px">fuzzy match</div>` +
+      state.pResults.map((r,i) => paletteRow(r, i)).join('');
+    attachPaletteHandlers();
+    return;
+  }
+  body.innerHTML = `<div class="p-empty">no match · try "edit photo", "make brochure", "3d render", "voice memo"</div>`;
+  state.pResults = [];
+}
+
+function launchTool(tool, hint){
+  const url = new URL(tool.url);
+  if(hint && hint.trim()) url.searchParams.set('intent', hint.trim());
+  url.searchParams.set('from', 'fallstudio');
+  window.open(url.toString(), '_blank', 'noopener');
+  toast('opening ' + tool.name + ' ↗');
+  closePalette();
+}
+
+/* ---------- settings ---------- */
+function openSettings(){
+  const s = state.settings;
+  document.getElementById('sAnthropic').value = s.anthropicKey || '';
+  document.getElementById('sOpenai').value = s.openaiKey || '';
+  document.getElementById('sGemini').value = s.geminiKey || '';
+  document.getElementById('sOpenrouter').value = s.openrouterKey || '';
+  document.getElementById('settings').classList.add('open');
+}
+function closeSettings(){ document.getElementById('settings').classList.remove('open'); }
+function saveSettings(){
+  state.settings.anthropicKey = document.getElementById('sAnthropic').value.trim();
+  state.settings.openaiKey = document.getElementById('sOpenai').value.trim();
+  state.settings.geminiKey = document.getElementById('sGemini').value.trim();
+  state.settings.openrouterKey = document.getElementById('sOpenrouter').value.trim();
+  localStorage.setItem('fallstudio.settings', JSON.stringify(state.settings));
+  closeSettings();
+  toast('settings saved');
+  updateTierBadge();
+}
+function loadSettings(){
+  try{ state.settings = JSON.parse(localStorage.getItem('fallstudio.settings') || '{}'); }catch(e){ state.settings = {}; }
+}
+
+/* ---------- toast ---------- */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+/* ---------- manifest export ---------- */
+function exportManifest(){
+  const manifest = {
+    name:'fallstudio', version:VERSION, prime:PRIME,
+    description:'sovereign creative suite · hub for the fall* creative tools',
+    sigil:'◊', seal:'◊·κ=1', licence:'MIT',
+    tools: SUITE.map(t => ({id:t.id, icon:t.icon, name:t.name, replaces:t.replaces, url:t.url, prime:t.prime, size:t.size})),
+    routes: ROUTES.map(r => ({tool:r.tool, pattern:r.verbs.source})),
+    generated: new Date().toISOString(),
+  };
+  const blob = new Blob([JSON.stringify(manifest, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'fallstudio-manifest-v' + VERSION + '.json';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+  toast('manifest exported');
+}
+
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown', e => {
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'){
+    e.preventDefault();
+    if(document.getElementById('palette').classList.contains('open')) closePalette();
+    else openPalette();
+    return;
+  }
+  if(e.key === 'Escape'){
+    closePalette();
+    closeSettings();
+    return;
+  }
+  if(!document.getElementById('palette').classList.contains('open')) return;
+  if(e.key === 'ArrowDown'){ e.preventDefault(); if(state.pResults.length){ state.pSel = (state.pSel+1)%state.pResults.length; refreshPaletteSel(); } }
+  else if(e.key === 'ArrowUp'){ e.preventDefault(); if(state.pResults.length){ state.pSel = (state.pSel-1+state.pResults.length)%state.pResults.length; refreshPaletteSel(); } }
+  else if(e.key === 'Enter'){
+    e.preventDefault();
+    const r = state.pResults[state.pSel];
+    if(r) launchTool(r.tool, r.hint || document.getElementById('pInput').value);
+  }
+});
+
+function refreshPaletteSel(){
+  document.querySelectorAll('.p-row').forEach((el,i) => el.classList.toggle('sel', i===state.pSel));
+  const sel = document.querySelector('.p-row.sel');
+  if(sel) sel.scrollIntoView({block:'nearest'});
+}
+
+let debounce;
+document.addEventListener('input', e => {
+  if(e.target.id === 'pInput'){
+    clearTimeout(debounce);
+    const q = e.target.value;
+    debounce = setTimeout(()=>runPaletteQuery(q), 180);
+  }
+});
+
+/* ---------- URL intent handoff (if someone arrives with ?intent=...) ---------- */
+function handleArrivingIntent(){
+  const p = new URLSearchParams(location.search);
+  const intent = p.get('intent');
+  if(intent){
+    setTimeout(()=>{
+      openPalette();
+      const inp = document.getElementById('pInput');
+      inp.value = intent;
+      runPaletteQuery(intent);
+    }, 400);
+  }
+}
+
+/* ---------- boot ---------- */
+loadSettings();
+renderGrid();
+checkLive();
+updateTierBadge();
+handleArrivingIntent();
+
+/* ---------- KONOMI sovereign shim · fallmesh · postMessage API ---------- */
+window.KONOMI={active:true,tier:'sovereign',prime:PRIME,check:()=>({ok:true,tier:'sovereign'})};
+try{const sig=new BroadcastChannel('fall-signal');sig.postMessage({source:'fallstudio',type:'hello',prime:PRIME,version:VERSION,ts:Date.now()});sig.addEventListener('message',e=>{const m=e.data;if(m&&m.type==='ping')sig.postMessage({source:'fallstudio',type:'pong',prime:PRIME})})}catch(e){}
+window.addEventListener('message',async e=>{const m=e.data;if(!m||m.target!=='fallstudio'||!m.action)return;let r=null;if(m.action==='ping')r={ok:true,prime:PRIME,version:VERSION};if(m.action==='list')r={tools:SUITE.map(t=>({id:t.id,name:t.name,url:t.url}))};if(m.action==='route'&&m.intent){const hits=routeT0(m.intent);r={hits:hits.map(h=>({tool:h.tool.id,match:h.match,url:h.tool.url}))}}e.source?.postMessage({target:m.source||'*',responseTo:m.action,data:r},'*')});
+</script>
+</body>
+</html>
