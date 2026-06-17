@@ -2,7 +2,7 @@
 
 **The sovereign creative suite. Adobe Creative Cloud, replaced one HTML file at a time.**
 
-- prime · **491**
+- prime · **1409**
 - version · **1.0.0**
 - seal · **◊·κ=1** · MIT
 - replaces · **Adobe Creative Cloud** (the suite hub / app launcher)
@@ -113,24 +113,24 @@ target.postMessage({target:'fallstudio', source:'mytool', action:'route', intent
 // → {hits:[{tool:'fallmage', match:'edit a photo', url:'...'}]}
 ```
 
-`action:'ping'` returns `{ok:true, prime:491, version:'1.0.0'}`.
+`action:'ping'` returns `{ok:true, prime:1409, version:'1.0.0'}`.
 
 ### fallmesh
 
 On boot FallStudio broadcasts on the `fall-signal` BroadcastChannel:
 
 ```js
-{source:'fallstudio', type:'hello', prime:491, version:'1.0.0', ts:<ms>}
+{source:'fallstudio', type:'hello', prime:1409, version:'1.0.0', ts:<ms>}
 ```
 
-Listens for `{type:'ping'}` and replies `{type:'pong', prime:491}`.
+Listens for `{type:'ping'}` and replies `{type:'pong', prime:1409}`.
 
 ### KONOMI
 
 The sovereign-tier licence shim is baked in and inert:
 
 ```js
-window.KONOMI = {active:true, tier:'sovereign', prime:491, check:()=>({ok:true, tier:'sovereign'})};
+window.KONOMI = {active:true, tier:'sovereign', prime:1409, check:()=>({ok:true, tier:'sovereign'})};
 ```
 
 ### Cascade tiers
@@ -169,7 +169,7 @@ FallStudio is built against the shared estate doctrine:
 8. L6 SKIN · mobile-first · estate dark palette · brass + amber
 9. L7 ASS · empty state shows all 8 tools immediately
 10. KONOMI sovereign shim · baked · inert
-11. fallmesh BroadcastChannel · `fall-signal` · prime 491
+11. fallmesh BroadcastChannel · `fall-signal` · prime 1409
 12. PWA manifest · `data:` URL
 13. README + MIT LICENSE
 14. `.nojekyll` for Pages
