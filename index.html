@@ -353,22 +353,19 @@ footer{
     'llama-3b':  { id: 'Llama-3.2-3B-Instruct-q4f16_1-MLC',   size: '~2GB',   label: '3B · balanced · default · most laptops' },
     'qwen-7b':   { id: 'Qwen2.5-7B-Instruct-q4f16_1-MLC',     size: '~5GB',   label: '7B · capable · needs decent GPU (M-series Mac / 8GB+ VRAM)' },
     'llama-8b':  { id: 'Llama-3.1-8B-Instruct-q4f16_1-MLC',   size: '~5GB',   label: '8B · common · needs decent GPU' },
-    'llama-70b': { id: 'Llama-3.1-70B-Instruct-q4f16_1-MLC',  size: '~40GB',  label: '70B · frontier · needs serious GPU + 64GB+ RAM' },
-  };
+    'llama-70b': { id: 'Llama-3.1-70B-Instruct-q4f16_1-MLC',  size: '~40GB',  label: '70B · frontier · needs serious GPU + 64GB+ RAM' }};
   const DEFAULT_MODEL = 'llama-3b';
 
   const T3_PROVIDERS = {
     anthropic: { label: 'Anthropic Claude', models: ['claude-sonnet-4-5','claude-opus-4-7','claude-haiku-4-5'], default: 'claude-sonnet-4-5', url: 'https://api.anthropic.com/v1/messages' },
     openai:    { label: 'OpenAI',           models: ['gpt-4o','gpt-4o-mini','o1-mini'],                          default: 'gpt-4o-mini',      url: 'https://api.openai.com/v1/chat/completions' },
-    google:    { label: 'Google Gemini',    models: ['gemini-1.5-pro','gemini-1.5-flash','gemini-2.0-flash-exp'], default: 'gemini-1.5-flash', url: 'https://generativelanguage.googleapis.com/v1beta/models/' },
-  };
+    google:    { label: 'Google Gemini',    models: ['gemini-1.5-pro','gemini-1.5-flash','gemini-2.0-flash-exp'], default: 'gemini-1.5-flash', url: 'https://generativelanguage.googleapis.com/v1beta/models/' }};
 
   // ─── State ───────────────────────────────────────────────────────
   const STATE = {
     config: loadConfig(),
     ai: { ready: false, loading: false, progress: 0, engine: null, model: null },
-    mesh: { active: false, peers: new Map(), bc: null, signal: null },
-  };
+    mesh: { active: false, peers: new Map(), bc: null, signal: null }};
 
   function loadConfig() {
     try { return JSON.parse(localStorage.getItem('fall-kit.config') || '{}'); }
@@ -435,8 +432,7 @@ footer{
     if (tier === 'T2' && STATE.ai.ready && STATE.ai.engine) {
       const r = await STATE.ai.engine.chat.completions.create({
         messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userMsg }],
-        max_tokens: maxTokens,
-      });
+        max_tokens: maxTokens});
       return r.choices[0].message.content;
     }
     if (tier === 'T3' && STATE.config.api_key && STATE.config.api_provider) {
@@ -453,8 +449,7 @@ footer{
       const r = await fetch(T3_PROVIDERS.anthropic.url, {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-        body: JSON.stringify({ model, max_tokens: maxTokens, system: sys, messages: [{ role: 'user', content: msg }] }),
-      });
+        body: JSON.stringify({ model, max_tokens: maxTokens, system: sys, messages: [{ role: 'user', content: msg }] })});
       if (!r.ok) throw new Error('Anthropic ' + r.status + ': ' + (await r.text()).slice(0, 200));
       const j = await r.json();
       return j.content[0].text;
@@ -463,8 +458,7 @@ footer{
       const r = await fetch(T3_PROVIDERS.openai.url, {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + key },
-        body: JSON.stringify({ model, max_tokens: maxTokens, messages: [{ role: 'system', content: sys }, { role: 'user', content: msg }] }),
-      });
+        body: JSON.stringify({ model, max_tokens: maxTokens, messages: [{ role: 'system', content: sys }, { role: 'user', content: msg }] })});
       if (!r.ok) throw new Error('OpenAI ' + r.status);
       const j = await r.json();
       return j.choices[0].message.content;
@@ -473,8 +467,7 @@ footer{
       const r = await fetch(T3_PROVIDERS.google.url + model + ':generateContent?key=' + encodeURIComponent(key), {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: sys + '\n\n---\n\n' + msg }] }], generationConfig: { maxOutputTokens: maxTokens } }),
-      });
+        body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: sys + '\n\n---\n\n' + msg }] }], generationConfig: { maxOutputTokens: maxTokens } })});
       if (!r.ok) throw new Error('Google ' + r.status);
       const j = await r.json();
       return j.candidates[0].content.parts[0].text;
@@ -715,8 +708,7 @@ footer{
     openMint: openMint,  // v1.2 · launch kcc-mint with this seed prefilled as parent
     MODELS: WEBLLM_MODELS,
     PROVIDERS: T3_PROVIDERS,
-    state: STATE,
-  };
+    state: STATE};
 })(typeof window !== 'undefined' ? window : globalThis);
 
 </script>
@@ -843,8 +835,7 @@ const state = {
   settings: {},
   pSel: 0,
   pResults: [],
-  liveCount: 0,
-};
+  liveCount: 0};
 
 /* ---------- suite registry ---------- */
 const SUITE = [
@@ -853,58 +844,49 @@ const SUITE = [
     url:'https://sjgant80-hub.github.io/fallmage/',
     purpose:'Raster image editor · crop, filter, paint, retouch · runs entirely in your browser.',
     size:'~210KB', prime:269,
-    features:['Layers · blend modes · masks','Brushes · filters · adjustments','PNG / JPG / WebP export','Drag-drop or paste any image'],
-  },
+    features:['Layers · blend modes · masks','Brushes · filters · adjustments','PNG / JPG / WebP export','Drag-drop or paste any image']},
   {
     id:'fallpdf', icon:'▦', name:'FallPDF', replaces:'Acrobat (writer)',
     url:'https://sjgant80-hub.github.io/fallpdf/',
     purpose:'Author PDFs from text, images and templates · letters, memos, invoices, briefs.',
     size:'~180KB', prime:311,
-    features:['Template-driven authoring','Headers, footers, page numbers','Inline images and tables','One-click export · self-contained PDF'],
-  },
+    features:['Template-driven authoring','Headers, footers, page numbers','Inline images and tables','One-click export · self-contained PDF']},
   {
     id:'fallvector', icon:'◊', name:'FallVector', replaces:'Illustrator',
     url:'https://sjgant80-hub.github.io/fallvector/',
     purpose:'Vector illustration · logos, icons, SVG · pen tool, paths, boolean ops.',
     size:'~240KB', prime:347,
-    features:['Pen · pencil · shape tools','Boolean path operations','SVG export · pixel-perfect','Layers · groups · alignment'],
-  },
+    features:['Pen · pencil · shape tools','Boolean path operations','SVG export · pixel-perfect','Layers · groups · alignment']},
   {
     id:'fallpage', icon:'▤', name:'FallPage', replaces:'InDesign',
     url:'https://sjgant80-hub.github.io/fallpage/',
     purpose:'Page layout · brochures, magazines, booklets, spreads · grids and columns.',
     size:'~200KB', prime:373,
-    features:['Multi-page documents','Grids · guides · columns','Text frames with linking','PDF / print-ready export'],
-  },
+    features:['Multi-page documents','Grids · guides · columns','Text frames with linking','PDF / print-ready export']},
   {
     id:'fallaudio', icon:'♪', name:'FallAudio', replaces:'Audition',
     url:'https://sjgant80-hub.github.io/fallaudio/',
     purpose:'Audio capture and editing · voice memos, podcasts, soundbeds · WAV / MP3.',
     size:'~190KB', prime:401,
-    features:['Browser mic capture · multi-track','Trim · fade · normalise · EQ','WAV / MP3 / OGG export','Waveform editing'],
-  },
+    features:['Browser mic capture · multi-track','Trim · fade · normalise · EQ','WAV / MP3 / OGG export','Waveform editing']},
   {
     id:'fallmotion', icon:'▶', name:'FallMotion', replaces:'After Effects',
     url:'https://sjgant80-hub.github.io/fallmotion/',
     purpose:'Motion graphics · logo animation, lower thirds, GIF / WebM loops · keyframe timeline.',
     size:'~260KB', prime:431,
-    features:['Keyframe timeline · easing','SVG + raster animation','GIF / WebM / MP4 export','Presets · reveals · lower thirds'],
-  },
+    features:['Keyframe timeline · easing','SVG + raster animation','GIF / WebM / MP4 export','Presets · reveals · lower thirds']},
   {
     id:'fallasset', icon:'⊞', name:'FallAsset', replaces:'Bridge / Lightroom',
     url:'https://sjgant80-hub.github.io/fallasset/',
     purpose:'Asset library · catalogue, tag, rate, browse · photo and graphic collections.',
     size:'~170KB', prime:457,
-    features:['IndexedDB-backed library','Tags · ratings · collections','EXIF · filter · search','Drag-drop import · batch ops'],
-  },
+    features:['IndexedDB-backed library','Tags · ratings · collections','EXIF · filter · search','Drag-drop import · batch ops']},
   {
     id:'fallscene', icon:'◉', name:'FallScene', replaces:'Dimension',
     url:'https://sjgant80-hub.github.io/fallscene/',
     purpose:'3D product staging · GLB import, materials, lighting, render to PNG.',
     size:'~280KB', prime:479,
-    features:['GLB / GLTF import','PBR materials · HDRI lighting','Real-time WebGL preview','Snapshot · PNG render export'],
-  },
-];
+    features:['GLB / GLTF import','PBR materials · HDRI lighting','Real-time WebGL preview','Snapshot · PNG render export']}];
 
 /* ---------- T0 router ---------- */
 const ROUTES = [
@@ -915,8 +897,7 @@ const ROUTES = [
   { tool:'fallaudio',  verbs:/\b(audio|sound|record|voice|wav|mp3|podcast|mic|jingle)\b/i },
   { tool:'fallmotion', verbs:/\b(animat|motion|gif|video|webm|reveal|lower third|loop|kinetic)\b/i },
   { tool:'fallasset',  verbs:/\b(organi[sz]e|browse|library|collection|tag|rate|catalog|catalogue|sort)\b/i },
-  { tool:'fallscene',  verbs:/\b(3d|render|scene|model|product render|glb|gltf|staging|three-?d)\b/i },
-];
+  { tool:'fallscene',  verbs:/\b(3d|render|scene|model|product render|glb|gltf|staging|three-?d)\b/i }];
 
 function routeT0(intent){
   if(!intent || !intent.trim()) return [];
@@ -1163,8 +1144,7 @@ function exportManifest(){
     sigil:'◊', seal:'◊·κ=1', licence:'MIT',
     tools: SUITE.map(t => ({id:t.id, icon:t.icon, name:t.name, replaces:t.replaces, url:t.url, prime:t.prime, size:t.size})),
     routes: ROUTES.map(r => ({tool:r.tool, pattern:r.verbs.source})),
-    generated: new Date().toISOString(),
-  };
+    generated: new Date().toISOString()};
   const blob = new Blob([JSON.stringify(manifest, null, 2)], {type:'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
